@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>KOPIPE Scanner</title>
+  <link rel="icon" type="image/png" href="kopipescanner.png">
+  <link href="index.css" media="screen" rel="stylesheet" type="text/css" />
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Website for scanning KOPIPE uploader files">
+    <meta name="keywords" content="KOPIPE, KOPIPE Uploader, KOPIPE.net">
+    <meta name="author" content="luckycdev">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="UTF-8"/>
+    <meta property='og:description'  content='Website for scanning KOPIPE uploader files'>
+    <meta name="keywords" content="KOPIPE, KOPIPE Uploader, KOPIPE.net"/>
+    <meta name="author" content="luckycdev"/>
+    <meta property='og:title'  content='kopipescanner.luckyc.dev'>
+    <meta property='og:url'  content='https://kopipescanner.luckyc.dev'>
+    <meta property="og:image"  content="https://kopipescanner.luckyc.dev/kopipescanner.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#eca03d">
+</head>
+<body>
+  <div class="header">
+    <img class="logo" src="kopipescanner.png" />
+    <h1>KOPIPE Scanner</h1>
+  </div>
+  <div id="timestamp">Loading data...</div>
+  <div id="summary">
+    <strong>Scanned: <span id="scanned">0</span></strong>
+  </div>
+  <div id="output">
+    <div class="section" id="successSection">
+      <h3>Success<span id="success" class="small">0</span></h3>
+    </div>
+    <div class="section" id="lockedSection">
+      <h3>Success (Password Locked)<span id="locked" class="small">0</span></h3>
+    </div>
+    <div class="section" id="imagesSection">
+      <h3>Images<span id="images" class="small">0</span></h3>
+    </div>
+    <div class="section" id="filteredSection">
+      <h3>No File<span id="filtered" class="small">0</span></h3>
+    </div>
+    <div class="section" id="failSection">
+      <h3>Fail<span id="fail" class="small">0</span></h3>
+    </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #292b2e;
+  color: #ffffff;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #eca03d;
+  margin-bottom: 15px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+#timestamp {
+  text-align: center;
+  margin-bottom: 15px;
+  font-style: italic;
+  color: #d1d1d1;
+}
+
+#summary {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#summary strong {
+  margin: 0 10px;
+}
+
+#output {
+  display: flex;
+  gap: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.section {
+  position: relative;
+  flex: 1;
+  background: rgb(63, 63, 63);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+  padding: 15px 20px;
+  height: 600px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionheader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+  color: #409cda;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.sectionheader h3, 
+.sectionheader span {
+  margin: 0;
+}
+
+.section h3 {
+  margin-top: 0;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+  color: #409cda;
+  font-weight: 700;
+}
+
+.item {
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.id {
+  color: #409cda;
+  font-weight: 700;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.msg {
+  color: #71acdd;
+}
+
+.msg.red {
+  color: #ee7e72;
+}
+
+.msg.gold {
+  color: rgb(245, 225, 114);
+}
+
+#imagesSection .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+#imagesSection img {
+  max-width: 120px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+#imagesSection .title {
+  color: #7eb0da;
+  font-size: 0.9em;
+  text-align: center;
+  max-width: 120px;
+  word-wrap: break-word;
+}
+
+.small {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    text-align: right;
+    line-height: 20px;
+    font-weight: bold;
+    color: #eca03d;
+}
