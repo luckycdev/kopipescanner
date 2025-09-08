@@ -25,7 +25,6 @@ And then if you want to return to your screen, run `screen -r kopipescanner`
 
 If you want to kill your screen, run `screen -X -S kopipescanner kill`
 </details>
-&nbsp;<!--to make the 7 lower-->
 
 7. The site should be running at the domain and your server should be working!
 
