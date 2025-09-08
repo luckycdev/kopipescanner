@@ -121,7 +121,7 @@ function populateImagesSection(items) {
 
 async function loadCachedData() {
   try {
-    const res = await fetch(`/scanData`);
+    const res = await fetch(`/api/scanData`);
     if (res.status === 204) {
       document.getElementById("timestamp").textContent = "Data not yet available";
       clearOutput();
@@ -173,7 +173,7 @@ function updateUIWithLiveData(data) {
   populateImagesSection(data.images || []);
 }
 
-const evtSource = new EventSource(`/scanProgress`);
+const evtSource = new EventSource(`/api/scanProgress`);
 evtSource.onmessage = e => {
   const data = JSON.parse(e.data);
 

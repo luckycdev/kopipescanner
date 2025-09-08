@@ -105,7 +105,7 @@ const sendToClients = (data) => {
   });
 };
 
-app.get("/scanProgress", (req, res) => {
+app.get("/api/scanProgress", (req, res) => {
   res.writeHead(200, {
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
@@ -160,7 +160,7 @@ app.get("/scanProgress", (req, res) => {
   }
 });
 
-app.get("/scanData", (req, res) => {
+app.get("/api/scanData", (req, res) => {
   if (!finishedCache.timestamp) return res.status(204).send();
   res.json({
     timestamp: finishedCache.timestamp,
