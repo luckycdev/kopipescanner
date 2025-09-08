@@ -1,5 +1,3 @@
-const port = 3000;
-const dataURL = `${window.location.protocol}//${window.location.hostname}:${port}`;
 const baseUrl = "https://kopipe.net/up/";
 const successSection = document.getElementById("successSection");
 const lockedSection = document.getElementById("lockedSection");
@@ -123,7 +121,7 @@ function populateImagesSection(items) {
 
 async function loadCachedData() {
   try {
-    const res = await fetch(`${dataURL}/scanData`);
+    const res = await fetch(`/scanData`);
     if (res.status === 204) {
       document.getElementById("timestamp").textContent = "Data not yet available";
       clearOutput();
@@ -175,7 +173,7 @@ function updateUIWithLiveData(data) {
   populateImagesSection(data.images || []);
 }
 
-const evtSource = new EventSource(`${dataURL}/scanProgress`);
+const evtSource = new EventSource(`/scanProgress`);
 evtSource.onmessage = e => {
   const data = JSON.parse(e.data);
 
