@@ -32,4 +32,6 @@ If you want to kill your screen, run `screen -X -S kopipescanner kill`
 
 ### Help can be found at https://discord.gg/AQ4sDF6Mkz
 
-<!--## Roadmap / to-do list-->
+## Roadmap / to-do list
+- fix the site... after frist scan
+- fix css and mobile ui
