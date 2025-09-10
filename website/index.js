@@ -49,7 +49,7 @@ function createLink(id, message, isError, locked, imgUrl) {
     a.appendChild(br);
     const img = document.createElement("img");
     img.src = imgUrl;
-    img.style.maxWidth = "100%";
+    img.style.maxWidth = "100%";//todo ong just make classes
     img.style.marginTop = "4px";
     a.appendChild(img);
   }
