@@ -77,7 +77,7 @@ function populateSection(section, items, setKey, isError = false, onlyLocked = f
 }
 
 function populateImagesSection(items) {
-  const imageExtensions = [".png", ".jpg", ".jpeg", ".gif"];
+  const imageExtensions = [".png", ".jpg", ".jpeg", ".gif"];//todo all? could test by uploading
 
   items.forEach(item => {
     if (!item.message) return;
