@@ -28,8 +28,7 @@ function createLink(id, message, isError, locked, imgUrl) {
   a.href = baseUrl + id;
   a.target = "_blank";
   a.rel = "noopener noreferrer";
-  a.style.display = "inline-flex";
-  a.style.alignItems = "center";
+  a.className = "createlinklinks";
 
   const idSpan = document.createElement("span");
   idSpan.className = "id";
@@ -49,8 +48,7 @@ function createLink(id, message, isError, locked, imgUrl) {
     a.appendChild(br);
     const img = document.createElement("img");
     img.src = imgUrl;
-    img.style.maxWidth = "100%";//todo ong just make classes
-    img.style.marginTop = "4px";
+    img.className = "displayimage";
     a.appendChild(img);
   }
 
@@ -97,15 +95,12 @@ function populateImagesSection(items) {
     a.href = baseUrl + id;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
-    a.style.display = "inline-block";
-    a.style.textAlign = "center";
+    a.className = "populateimagelinks";
 
     const img = document.createElement("img");
     img.src = item.imgUrl;
     img.alt = item.message;
-    img.style.maxWidth = "120px";
-    img.style.borderRadius = "6px";
-    img.style.marginBottom = "6px";
+    img.className = "populateimages";
     a.appendChild(img);
 
     let titleText = item.message.replace(/ Download$/i, "");

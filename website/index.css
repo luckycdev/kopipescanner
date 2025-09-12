@@ -149,3 +149,24 @@ a {
     font-weight: bold;
     color: #eca03d;
 }
+
+.displayimage {
+  max-width: 100%;
+  margin-top: 4px;
+}
+
+.populateimagelinks {
+  display: inline-block;
+  text-align: center;
+}
+
+.populateimages {
+  max-width: 120px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.createlinklinks {
+  display: inline-flex;
+  align-items: center;
+}
