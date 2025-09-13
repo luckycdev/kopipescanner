@@ -35,6 +35,8 @@ const digits = Array.from({ length: 10 }, (_, i) => i.toString());
 const generateUrlsToScan = () => {
   const urlsToScan = [];
 
+  // NOTE - these are just based off of me googling "site:kopipe.net/up" and i put all the ones i saw
+
   // 44x and 44X
   lowerLetters.forEach(ch => urlsToScan.push(`44${ch}`));
   upperLetters.forEach(ch => urlsToScan.push(`44${ch}`));
@@ -42,7 +44,6 @@ const generateUrlsToScan = () => {
   // 42x and 42X
   lowerLetters.forEach(ch => urlsToScan.push(`42${ch}`));
   upperLetters.forEach(ch => urlsToScan.push(`42${ch}`));
-  urlsToScan.push("42");
 
   // 3xx
   lowerLetters.forEach(ch1 => {
@@ -69,16 +70,6 @@ const generateUrlsToScan = () => {
   }
 
   return urlsToScan;
-};
-
-let cache = { // current scan
-  timestamp: null,
-  scanned: 0,
-  success: [],
-  filtered: [],
-  fail: [],
-  locked: [],
-  images: []
 };
 
 let finishedCache = {
@@ -263,7 +254,6 @@ async function doScan() {
   }
 
   newCache.timestamp = Date.now();
-  cache = newCache;
   finishedCache = { ...newCache }; // update finished cache
   scanRunning = false;
 
