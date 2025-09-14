@@ -168,22 +168,59 @@ function updateUIWithLiveData(data) {
   populateImagesSection(data.images || []);
 }
 
-const evtSource = new EventSource(`/api/scanProgress`);
-evtSource.onmessage = e => {
-  const data = JSON.parse(e.data);
-
-  if (data.message === "No scan running") {
-    loadCachedData();
-    return;
+async function init() {
+  try {
+    const res = await fetch('/api/scanData');
+    if (res.status === 204) {
+      // if no finished cache, use eventsource for live scan
+      openScanProgressStream();
+      return;
+    }
+    const data = await res.json();
+    document.getElementById("timestamp").textContent = `Data from: ${new Date(data.timestamp).toLocaleString()}`;
+    document.getElementById("scanned").textContent = data.scanned;
+    document.getElementById("success").textContent = data.success.length;
+    document.getElementById("locked").textContent = data.locked.length;
+    document.getElementById("images").textContent = data.images.length;
+    document.getElementById("filtered").textContent = data.filtered.length;
+    document.getElementById("fail").textContent = data.fail.length;
+    clearOutput();
+    populateSection(lockedSection, data.locked, "locked", false, true);
+    populateSection(successSection, data.success, "success", false, false);
+    populateSection(filteredSection, data.filtered, "filtered", true);
+    populateSection(failSection, data.fail, "fail", true);
+    populateImagesSection(data.images);
+  } catch (e) {
+    document.getElementById("timestamp").textContent = "Error loading cached data.";
+    clearOutput();
+    console.error(e);
+    // if error try the live scan
+    openScanProgressStream();
   }
-  if (data.done) {
+}
+
+function openScanProgressStream() {
+  const evtSource = new EventSource(`/api/scanProgress`);
+  evtSource.onmessage = e => {
+    const data = JSON.parse(e.data);
+
+    if (data.message === "No scan running") {
+      loadCachedData();
+      evtSource.close();
+      return;
+    }
+    if (data.done) {
+      loadCachedData();
+      evtSource.close();
+      return;
+    }
+
+    updateUIWithLiveData(data);
+  };
+  evtSource.onerror = () => {
     loadCachedData();
-    return;
-  }
+    evtSource.close();
+  };
+}
 
-  updateUIWithLiveData(data);
-};
-
-evtSource.onerror = () => {
-  loadCachedData();
-};
+document.addEventListener('DOMContentLoaded', init);
