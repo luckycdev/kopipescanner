@@ -13,14 +13,12 @@ const displayed = {
   images: new Set(),
 };
 
-function clearOutput() {
-  [successSection, filteredSection, failSection, lockedSection, imagesSection].forEach(section => {
-    section.innerHTML = `<h3>${section.querySelector("h3").textContent}</h3>`;
-  });
-
-  for (const key in displayed) {
-    displayed[key].clear();
-  }
+function setSectionCounts(data) {
+  document.getElementById("success").textContent = (data.success || []).length;
+  document.getElementById("locked").textContent = (data.locked || []).length;
+  document.getElementById("images").textContent = (data.images || []).length;
+  document.getElementById("filtered").textContent = (data.filtered || []).length;
+  document.getElementById("fail").textContent = (data.fail || []).length;
 }
 
 function createLink(id, message, isError, locked, imgUrl) {
@@ -72,6 +70,7 @@ function populateSection(section, items, setKey, isError = false, onlyLocked = f
     div.appendChild(link);
     section.appendChild(div);
   });
+  updateSectionCounts();
 }
 
 function populateImagesSection(items) {
@@ -114,35 +113,32 @@ function populateImagesSection(items) {
   });
 }
 
+function updateSectionCounts() {
+  document.getElementById("success").textContent = displayed.success.size;
+  document.getElementById("locked").textContent = displayed.locked.size;
+  document.getElementById("images").textContent = displayed.images.size;
+  document.getElementById("filtered").textContent = displayed.filtered.size;
+  document.getElementById("fail").textContent = displayed.fail.size;
+}
+
 async function loadCachedData() {
   try {
     const res = await fetch(`/api/scanData`);
     if (res.status === 204) {
       document.getElementById("timestamp").textContent = "Data not yet available";
-      clearOutput();
       return;
     }
     const data = await res.json();
-
     document.getElementById("timestamp").textContent = `Data from: ${new Date(data.timestamp).toLocaleString()}`;
     document.getElementById("scanned").textContent = data.scanned;
-    document.getElementById("success").textContent = data.success.length;
-    document.getElementById("locked").textContent = data.locked.length;
-    document.getElementById("images").textContent = data.images.length;
-    document.getElementById("filtered").textContent = data.filtered.length;
-    document.getElementById("fail").textContent = data.fail.length;
-
-    clearOutput();
-
     populateSection(lockedSection, data.locked, "locked", false, true);
     populateSection(successSection, data.success, "success", false, false);
     populateSection(filteredSection, data.filtered, "filtered", true);
     populateSection(failSection, data.fail, "fail", true);
     populateImagesSection(data.images);
-
+    updateSectionCounts();
   } catch (e) {
     document.getElementById("timestamp").textContent = "Error loading cached data.";
-    clearOutput();
     console.error(e);
   }
 }
@@ -155,44 +151,33 @@ function updateUIWithLiveData(data) {
   }
 
   document.getElementById("scanned").textContent = data.scanned || 0;
-  document.getElementById("success").textContent = (data.success || []).length;
-  document.getElementById("filtered").textContent = (data.filtered || []).length;
-  document.getElementById("fail").textContent = (data.fail || []).length;
-  document.getElementById("locked").textContent = (data.locked || []).length;
-  document.getElementById("images").textContent = (data.images || []).length;
-
   populateSection(lockedSection, data.locked || [], "locked", false, true);
   populateSection(successSection, data.success || [], "success", false);
   populateSection(filteredSection, data.filtered || [], "filtered", true);
   populateSection(failSection, data.fail || [], "fail", true);
   populateImagesSection(data.images || []);
+  updateSectionCounts();
 }
 
 async function init() {
   try {
     const res = await fetch('/api/scanData');
     if (res.status === 204) {
-      // if no finished cache, use eventsource for live scan
+      // if no finished cache use eventsource for live scan
       openScanProgressStream();
       return;
     }
     const data = await res.json();
     document.getElementById("timestamp").textContent = `Data from: ${new Date(data.timestamp).toLocaleString()}`;
     document.getElementById("scanned").textContent = data.scanned;
-    document.getElementById("success").textContent = data.success.length;
-    document.getElementById("locked").textContent = data.locked.length;
-    document.getElementById("images").textContent = data.images.length;
-    document.getElementById("filtered").textContent = data.filtered.length;
-    document.getElementById("fail").textContent = data.fail.length;
-    clearOutput();
     populateSection(lockedSection, data.locked, "locked", false, true);
     populateSection(successSection, data.success, "success", false, false);
     populateSection(filteredSection, data.filtered, "filtered", true);
     populateSection(failSection, data.fail, "fail", true);
     populateImagesSection(data.images);
+    updateSectionCounts();
   } catch (e) {
     document.getElementById("timestamp").textContent = "Error loading cached data.";
-    clearOutput();
     console.error(e);
     // if error try the live scan
     openScanProgressStream();
