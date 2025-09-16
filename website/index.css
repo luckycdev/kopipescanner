@@ -9,6 +9,7 @@ h1 {
   text-align: center;
   color: #eca03d;
   margin-bottom: 15px;
+  cursor: default;
 }
 
 .header {
@@ -33,11 +34,13 @@ h1 {
   margin-bottom: 15px;
   font-style: italic;
   color: #d1d1d1;
+  cursor: default;
 }
 
 #summary {
   text-align: center;
   margin-bottom: 20px;
+  cursor: default;
 }
 
 #summary strong {
@@ -62,6 +65,7 @@ h1 {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  cursor: default;
 }
 
 .sectionheader {
@@ -169,4 +173,28 @@ a {
 .createlinklinks {
   display: inline-flex;
   align-items: center;
+}
+
+.social-icons {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+img.social{
+    height: 30px;
+}
+
+.watermark{
+    position:fixed;
+    left:10px;
+    bottom:10px;
+}
+
+.watermark a {
+    font-size:12px;
+    color:white;
 }

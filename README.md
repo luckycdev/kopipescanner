@@ -1,4 +1,4 @@
-<img src="website/kopipescanner.png" width="150" height="150">
+<img src="website/img/kopipescanner.png" width="150" height="150">
 
 # Info
 This is a website that scans links for files uploaded to KOPIPE and displays all of the files.
